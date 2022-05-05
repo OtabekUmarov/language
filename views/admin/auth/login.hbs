@@ -1,0 +1,49 @@
+<div class="login-page">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-12 col-lg-4">
+        <div class="card login-box-container">
+          <div class="card-body">
+            <div class="authent-logo">
+              <img src="../../assets/images/logo@2x.png" alt="" />
+            </div>
+            <div class="authent-text">
+              <p>Welcome</p>
+              <p>Please Sign-in to your account.</p>
+            </div>
+            <form method="POST" action="/admin/auth/login">
+              <input type="hidden" name="_csrf" value="{{csrf}}" />
+              <div class="mb-3">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="Username"
+                  />
+                  <label for="floatingInput">Username</label>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="form-floating">
+                  <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    id="floatingPassword"
+                    placeholder="Password"
+                  />
+                  <label for="floatingPassword">Password</label>
+                </div>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-info m-b-xs">Sign In</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

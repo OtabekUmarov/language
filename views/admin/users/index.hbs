@@ -1,0 +1,31 @@
+<div class="container-xxl flex-grow-1 container-p-y">
+  <div class="card">
+    <h5 class="card-header">{{title}}</h5>
+    <div class="card-body">
+      <div class="table-responsive text-nowrap">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Ismi</th>
+              <th>Familiyasi</th>
+              <th>Telefon raqami</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each users}}
+            <tr>
+              <td>
+                <strong>{{name}}</strong>
+              </td>
+              <td>{{lname}}</td>
+              <td>
+                {{phone}}
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
