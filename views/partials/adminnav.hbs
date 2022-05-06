@@ -1,18 +1,17 @@
 <div class="page-sidebar">
   <ul class="list-unstyled accordion-menu">
     <li class="sidebar-title">Main</li>
-    <li class="active-page">
-      <a href="index.html"><i data-feather="home"></i>Dashboard</a>
+    <li class="{{#if isLanguage}}active-page{{/if}}">
+      <a href="/admin/language"><i data-feather="home"></i>Tillar</a>
     </li>
-    <li class="sidebar-title">Apps</li>
-    <li>
-      <a href="email.html"><i data-feather="inbox"></i>Email</a>
+    <li class="{{#if isText}}active-page{{/if}}">
+      <a href="/admin/text"><i data-feather="inbox"></i>Matnlar</a>
     </li>
-    <li>
+    {{!-- <li>
       <a href="calendar.html"><i data-feather="calendar"></i>Calendar</a>
     </li>
     <li>
       <a href="social.html"><i data-feather="user"></i>Social</a>
-    </li>
+    </li> --}}
   </ul>
 </div>

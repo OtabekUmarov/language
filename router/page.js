@@ -4,7 +4,7 @@ const {
 const router = Router()
 const auth = require('../middleware/auth')
 const Gallery = require('../modeles/gallery')
-const GalleryMenu = require('../modeles/gallerymenu')
+const GalleryMenu = require('../modeles/language')
 const GallerySubMenu = require('../modeles/gallerysubmenu')
 const Message = require('../modeles/message')
 const Classes = require('../modeles/classes')

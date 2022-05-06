@@ -1,5 +1,5 @@
 const {Schema, model} = require('mongoose')
-const gallerymenu = new Schema({
+const language = new Schema({
     title: {
       type: String,
       default: ''
@@ -9,4 +9,4 @@ const gallerymenu = new Schema({
       default: Date.now
     }
 })
-module.exports = model('GalleryMenu',gallerymenu)
+module.exports = model('Language',language)
