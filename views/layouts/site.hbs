@@ -2,16 +2,18 @@
 
 
 
-<body id="inner_page">
+<body >
+  {{!-- <div id="loader">
+      <div class="loader-container">
+        <img src="/images/site.gif" alt="" class="loader-site" />
+      </div>
+    </div> --}}
+  <div class="wrapper">
+    {{> sitenav}}
+    {{{body}}}
+    {{> sitefooter}}
+  </div>
 
-  {{> sitenav}}
-  {{{body}}}
-  {{!-- <div class="container">
-  </div> --}}
-
-  {{!-- <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a> --}}
   {{#if error}}
   <div class="toast error">
     <div class="card bg-danger text-white">
@@ -28,7 +30,6 @@
     </div>
   </div>
   {{/if}}
-  {{> sitefooter}}
   {{> sitescripts}}
 
   <script>

@@ -146,7 +146,7 @@ router.post('/user/login', async (req, res) => {
     //     })
     } else {
         req.flash('error', 'Telefon raqam yoki parol noto\'gri kiritildi')
-        res.redirect('/')
+        res.redirect('/admin/language')
     }
 })
 

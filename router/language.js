@@ -7,32 +7,30 @@ const Language = require('../modeles/language')
 
 
 router.get('/',async (req, res) => {
-  let language = await Language.find().lean()
+  let languages = await Language.find().lean()
   res.render('admin/language', {
       title: 'Tillar',
       layout: "admin",
       success: req.flash('success'),
       error: req.flash('error'),
       isLanguage: true, 
-      language
+      languages
   })
 })
 
 router.post('/', async (req, res) => {
-  const { menuId,menu } = req.body
-  let img = req.file.path
-  const gallery = await new Gallery({menuId,img, menu})
-  await gallery.save()
-  res.redirect(`/admin/gallery/photos/${menu}`)
+  const { title } = req.body
+  const language = await new Language({title})
+  await language.save()
+  res.redirect(`/admin/language`)
 })
 
-router.get('/delete/:id/:menu', async (req, res) => {
+router.get('/delete/:id', async (req, res) => {
   let _id = req.params.id
-  let menu = req.params.menu
-  await Gallery.findByIdAndDelete(
+  await Language.findByIdAndDelete(
     _id
   )
-  res.redirect(`/admin/gallery/photos/${menu}`)
+  res.redirect(`/admin/language`)
 })
 
 module.exports = router
