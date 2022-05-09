@@ -94,6 +94,8 @@
     margin-bottom: 0;
     width: 100% !important;
     border-radius: 0;
+    display: flex;
+    justify-content: space-between;
 }
 .ttmenu .navbar-default .dropdown-menu {
     background: rgb(255,255,255); /* Old browsers */

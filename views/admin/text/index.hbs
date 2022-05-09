@@ -1,0 +1,131 @@
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex mb-4 justify-content-between" style="align-items: center; ">
+          <h5 class="card-title" style="margin: 0;">{{title}}</h5>
+          <button class="btn btn-primary" onclick="openModal()">
+            Matn qo'shish
+          </button>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th width="1%">№</th>
+              <th scope="col">Nomi</th>
+              <th scope="col">Sharq tili</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each texts}}
+            <tr>
+              <th>{{@index}}</th>
+              <td>{{title}}</td>
+              <td>{{languageId.title}}</td>
+              <td>
+                <button class="btn badge bg-success me-3" onclick="openText('{{content}}')">Matnni korish</button>
+                <a href="/admin/text/delete/{{_id}}" class="badge bg-danger">O'chirish</a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true"
+  role="dialog">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <form action="/admin/text" method="post" action="">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">
+            Sharq tillariga matn qo'shish
+          </h5>
+          <button type="button" class="btn-close" onclick="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="_csrf" value="{{csrf}}" />
+          <div class="mb-3">
+            <label for="selectLabel" class="form-label">Tilni tanlang</label>
+            <select name="languageId" class="form-control" id="selectLabel">
+              {{#each languages}}
+              <option value="{{_id}}">{{title}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="titleInput" class="form-label">Nom kiriting</label>
+            <input type="text" name="title" class="form-control" id="titleInput">
+          </div>
+          <div class="mb-3">
+            <label for="textInput" class="form-label">Matn kiriting</label>
+            <textarea name="content" class="form-control" id="textInput" rows="6"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary">Saqlash</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal1" tabindex="-1"  aria-modal="true"
+  role="dialog">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">
+            Matnni ko'rish
+          </h5>
+          <button type="button" class="btn-close" onclick="closeModal1()"></button>
+        </div>
+        <div class="modal-body">
+          <p class="card-description" id="content">
+
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal1()">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary">Saqlash</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-backdrop"></div>
+
+<script>
+  function openModal() {
+    document.body.classList.add("modal-open");
+    document.getElementById('modal-backdrop').classList.add("modal-backdrop", "show");
+    document.getElementById('modal').classList.add("show");
+    document.getElementById('modal').style.display = "block";
+  }
+
+  function closeModal() {
+    document.body.classList.remove("modal-open");
+    document.getElementById('modal-backdrop').classList.remove("modal-backdrop", "show", "fade");
+    document.getElementById('modal').classList.remove("show");
+    document.getElementById('modal').style.display = "none";
+  }
+  
+  function closeModal1() {
+    document.getElementById('content').innerHTML = '';
+    document.body.classList.remove("modal-open");
+    document.getElementById('modal-backdrop').classList.remove("modal-backdrop", "show", "fade");
+    document.getElementById('modal1').classList.remove("show");
+    document.getElementById('modal1').style.display = "none";
+  }
+  openText = (content) => {
+    document.getElementById('content').innerHTML = content;
+    document.body.classList.add("modal-open");
+    document.getElementById('modal-backdrop').classList.add("modal-backdrop", "show");
+    document.getElementById('modal1').classList.add("show");
+    document.getElementById('modal1').style.display = "block";
+  }
+</script>
