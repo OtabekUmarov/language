@@ -5,7 +5,7 @@
         <div class="d-flex mb-4 justify-content-between" style="align-items: center; ">
           <h5 class="card-title" style="margin: 0;">{{title}}</h5>
           <button class="btn btn-primary" onclick="openModal()">
-            Til qo'shish
+            Qo'shish
           </button>
         </div>
         <table class="table table-hover">
@@ -13,15 +13,17 @@
             <tr>
               <th width="1%">№</th>
               <th scope="col">Nomi</th>
+              <th scope="col">Izoh</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {{#each languages}}
+            {{#each letters}}
             <tr>
               <td>{{increment @index}}</td>
               <td>{{title}}</td>
-              <td><a href="/admin/language/delete/{{_id}}" class="badge bg-danger">O'chirish</a></td>
+              <td>{{description}}</td>
+              <td><a href="/admin/letter/delete/{{_id}}/{{languageId}}" class="badge bg-danger">O'chirish</a></td>
             </tr>
             {{/each}}
           </tbody>
@@ -35,18 +37,23 @@
   role="dialog">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
-      <form action="/admin/language" method="post" action="">
+      <form action="/admin/letter" method="post" action="">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalScrollableTitle">
-            Sharq tillarini qo'shish
+            Harf qo'shish
           </h5>
           <button type="button" class="btn-close" onclick="closeModal()"></button>
         </div>
         <div class="modal-body">
           <input type="hidden" name="_csrf" value="{{csrf}}" />
+          <input type="hidden" name="languageId" value="{{language}}" />
           <div class="mb-3">
-            <label for="titleInput" class="form-label">Til nomi</label>
-            <input type="text" name="title" class="form-control" id="titleInput">
+            <label for="titleInput" class="form-label">Harf kiriting</label>
+            <input type="text" name="title" placeholder="Harf kiriting" class="form-control" id="titleInput">
+          </div>
+          <div class="mb-3">
+            <label for="textInput" class="form-label">Izoh</label>
+            <input type="text" name="description" placeholder="Izoh" class="form-control" id="textInput">
           </div>
         </div>
         <div class="modal-footer">
@@ -57,7 +64,6 @@
     </div>
   </div>
 </div>
-
 <div id="modal-backdrop"></div>
 
 <script>
@@ -74,4 +80,5 @@
     document.getElementById('modal').classList.remove("show");
     document.getElementById('modal').style.display = "none";
   }
+  
 </script>

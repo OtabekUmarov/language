@@ -1,10 +1,10 @@
 const {Schema, model} = require('mongoose')
-const text = new Schema({
+const letter = new Schema({
     title: {
       type: String,
       default: ''
     },
-    content: {
+    description: {
       type: String,
       default: ''
     },
@@ -13,4 +13,4 @@ const text = new Schema({
       ref: 'Language'
     },
 })
-module.exports = model('Text',text)
+module.exports = model('Letter',letter)

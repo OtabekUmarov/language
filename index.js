@@ -20,7 +20,9 @@ const hbs = exphbs.create({
     defaultLayout: 'admin',
     extname: 'hbs'
 })
-
+hbs.handlebars.registerHelper("increment", function (index) {
+    return parseInt(index) + 1
+})
 
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
@@ -40,8 +42,8 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        // maxAge: 60 * 60 * 60
-        maxAge: 60 * 60 * 60 * 10
+        maxAge: 1000 * 60 * 60 * 0.5
+        // 1000 * 60 * 60 * 24 * 7 => 1 hafta 
     },
     store
 }))
