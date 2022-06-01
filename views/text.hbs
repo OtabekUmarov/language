@@ -1,0 +1,74 @@
+<section class="grey section">
+  <div class="container">
+    {{#each text}}
+    <h2>{{title}}</h2>
+    <p>{{content}}</p>
+    <button class="btn btn-default" onclick="speaker('{{content}}','{{_id}}')">Eshitish</button>
+    <button id="{{_id}}" style="display:none" onclick="stopSpeaker('{{_id}}')" class="stop btn btn-primary">
+      To'htatish
+    </button>
+    {{/each}}
+  </div>
+</section>
+
+<script>
+  function stopSpeaker(id){
+     window.speechSynthesis.cancel();
+    document.getElementById(id).style.display = 'none';
+
+  }
+  let btns = document.querySelectorAll('.stop');
+  function speaker(content,id) {
+    btns.forEach((el)=> {
+      el.style.display = 'none';
+    })
+    document.getElementById(id).style.display = 'inline-block';
+    window.onload = function () {
+      for (let i = 0; i < 12; i++) {
+        create(i);
+      }
+    }
+    function create(i) {
+      let main = document.createElement("div")
+      main.className = "main";
+      main.onclick = function () {
+        speak(data[i][select.selectedIndex + 1], select.value);
+      }
+      let comment = document.createElement("p");
+      comment.className = "comment";
+      comment.append(data[i][4]);
+
+      main.appendChild(image);
+      main.appendChild(comment);
+
+      document.getElementById("container").appendChild(main);
+    }
+
+    const select = 'ko-KR'
+    {{!-- const text = document.getElementById("text") --}}
+    const text = content
+    const btn = document.getElementById("btn") //button 정보
+
+    {{!-- btn.addEventListener("click", e => { --}}
+      speak(text, select);
+    {{!-- }) --}}
+
+    function enter(event) {
+      if (event.keyCode == 13) {
+        speak(text, select);
+      }
+    }
+
+    function speak(text, language) {
+      window.speechSynthesis.cancel(); // 초기화
+      if (!text) {
+        text = "Please fill in the blank";
+      }
+
+      const speechMsg = new SpeechSynthesisUtterance();
+      speechMsg.lang = language; //언어 설정
+      speechMsg.text = text; //글 설정
+      window.speechSynthesis.speak(speechMsg); //소리 출력
+    }
+  }
+</script>

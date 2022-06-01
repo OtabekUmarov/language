@@ -9,6 +9,8 @@ const GallerySubMenu = require('../modeles/gallerysubmenu')
 const Message = require('../modeles/message')
 const Classes = require('../modeles/classes')
 const Seat = require('../modeles/seat')
+const Text = require('../modeles/text')
+
 
 
 
@@ -31,6 +33,14 @@ router.get('/about',async (req, res) => {
         title: 'About',
         layout: "site",
         isAbout: true, menu
+    })
+})
+router.get('/text',async (req, res) => {
+    let text = await Text.find().lean()
+    res.render('text', {
+        title: 'Matnlar',
+        layout: "site",
+        isAbout: true, text
     })
 })
 
