@@ -21,8 +21,15 @@ router.get('/',async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const { title, content, languageId } = req.body
-  const text = await new Text({title, content, languageId})
+  const { title, content, languageId, uzbek } = req.body
+  const text = await new Text({title, content, languageId, uzbek})
+  await text.save()
+  res.redirect(`/admin/text`)
+})
+
+router.post('/update', async (req, res) => {
+  const { title, content, languageId, uzbek } = req.body
+  const text = await new Text({title, content, languageId, uzbek})
   await text.save()
   res.redirect(`/admin/text`)
 })

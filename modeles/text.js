@@ -8,6 +8,10 @@ const text = new Schema({
       type: String,
       default: ''
     },
+    uzbek: {
+      type: String,
+      default: ''
+    },
     languageId: {
       type: Schema.Types.ObjectId,
       ref: 'Language'

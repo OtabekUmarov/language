@@ -24,8 +24,9 @@
               <td>{{title}}</td>
               <td>{{languageId.title}}</td>
               <td>
-                <button class="btn badge bg-success me-3" onclick="openText('{{content}}')">Matnni korish</button>
+                <button class="btn badge bg-success me-3" onclick="openText('{{_id}}')">Matnni korish</button>
                 <a href="/admin/text/delete/{{_id}}" class="badge bg-danger">O'chirish</a>
+                {{!-- <button class="btn badge bg-success me-3" onclick="openEdit('{{_id}}')">Tahrirlash</button> --}}
               </td>
             </tr>
             {{/each}}
@@ -62,6 +63,10 @@
             <input type="text" name="title" class="form-control" id="titleInput">
           </div>
           <div class="mb-3">
+            <label for="textInput1" class="form-label">Tarjima matn kiriting</label>
+            <textarea name="uzbek" class="form-control" id="textInput1" rows="6"></textarea>
+          </div>
+          <div class="mb-3">
             <label for="textInput" class="form-label">Matn kiriting</label>
             <textarea name="content" class="form-control" id="textInput" rows="6"></textarea>
           </div>
@@ -96,6 +101,50 @@
   </div>
 </div>
 
+<div class="modal fade" id="modaledit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true"
+  role="dialog">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <form action="/admin/text/update" method="post" action="">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">
+            Tahrirlash
+          </h5>
+          <button type="button" class="btn-close" onclick="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="_csrf" value="{{csrf}}" />
+          <input type="hidden" name="_id" id="editId" />
+          <input type="hidden" name="languageId" id="languageId" />
+          {{!-- <div class="mb-3">
+            <label for="selectLabel" class="form-label">Tilni tanlang</label>
+            <select name="languageId" class="form-control" id="selectLabel">
+              {{#each languages}}
+              <option value="{{_id}}">{{title}}</option>
+              {{/each}}
+            </select>
+          </div> --}}
+          <div class="mb-3">
+            <label for="titleInput" class="form-label">Nom kiriting</label>
+            <input type="text" name="title" class="form-control" id="titleInput">
+          </div>
+          <div class="mb-3">
+            <label for="textInput1" class="form-label">Tarjima matn kiriting</label>
+            <textarea name="uzbek" class="form-control" id="textInput1" rows="6"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="textInput" class="form-label">Matn kiriting</label>
+            <textarea name="content" class="form-control" id="textInput" rows="6"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary">Saqlash</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 <div id="modal-backdrop"></div>
 
 <script>
@@ -117,11 +166,18 @@
     document.body.classList.remove("modal-open");
     document.getElementById('modal-backdrop').classList.remove("modal-backdrop", "show", "fade");
     document.getElementById('modal1').classList.remove("show");
+    document.getElementById('modaledit').classList.remove("show");
     document.getElementById('modal1').style.display = "none";
+    document.getElementById('modaledit').style.display = "none";
     window.speechSynthesis.cancel();
   }
-  openText = (content) => {
-    document.getElementById('text').value = content;
+  openText = (id) => {
+    fetch('/api/text/' + id)
+      .then(response => response.json())
+      .then(data => {
+        let content = data.content;
+        document.getElementById('text').value = content;
+      })
     document.body.classList.add("modal-open");
     document.getElementById('modal-backdrop').classList.add("modal-backdrop", "show");
     document.getElementById('modal1').classList.add("show");

@@ -2,8 +2,9 @@
   <div class="container">
     {{#each text}}
     <h2>{{title}}</h2>
+    <p>{{uzbek}}</p>
     <p>{{content}}</p>
-    <button class="btn btn-default" onclick="speaker('{{content}}','{{_id}}')">Eshitish</button>
+    <button class="btn btn-default" onclick="speaker('{{_id}}')">Eshitish</button>
     <button id="{{_id}}" style="display:none" onclick="stopSpeaker('{{_id}}')" class="stop btn btn-primary">
       To'htatish
     </button>
@@ -13,13 +14,16 @@
 
 <script>
   function stopSpeaker(id){
-     window.speechSynthesis.cancel();
+    window.speechSynthesis.cancel();
     document.getElementById(id).style.display = 'none';
-
   }
   let btns = document.querySelectorAll('.stop');
-  function speaker(content,id) {
-    btns.forEach((el)=> {
+  function speaker(id) {
+    fetch('/api/text/'+id)
+      .then(res => res.json())
+      .then(data => {
+        let content = data.content;
+        btns.forEach((el)=> {
       el.style.display = 'none';
     })
     document.getElementById(id).style.display = 'inline-block';
@@ -70,5 +74,7 @@
       speechMsg.text = text; //글 설정
       window.speechSynthesis.speak(speechMsg); //소리 출력
     }
+    });
+    
   }
 </script>

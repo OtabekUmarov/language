@@ -12,10 +12,6 @@ const Seat = require('../modeles/seat')
 const Text = require('../modeles/text')
 
 
-
-
-
-
 router.get('/', async (req, res) => {
     let menu = await GalleryMenu.find().lean()
     res.render('index', {
@@ -42,6 +38,11 @@ router.get('/text',async (req, res) => {
         layout: "site",
         isAbout: true, text
     })
+})
+router.get('/api/text/:id',async (req, res) => {
+    let _id = req.params.id
+    let text = await Text.findOne({_id}).lean()
+    res.send(text)
 })
 
 router.get('/class', async(req, res) => {
