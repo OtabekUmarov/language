@@ -1,0 +1,34 @@
+<section class="grey section text-page">
+  <div class="container">
+    <div class="container-md">
+      <h2>Quyidagi maydonga koreyscha matn yozib uni talaffuzini eshitishingiz mumkin</h2>
+      <textarea placeholder="Matn kiriting" class="form-control" name="" id="text1" cols="30" rows="10"></textarea>
+      <div class="my-row d-flex">
+        <div class="my-col-6">
+          <button onclick="speaker()" id="btn-speaker" class="btn btn-primary">Eshitish</button>
+        </div>
+        <div class="my-col-6">
+          <button onclick="stopSpeaker()" id="btn-speaker1" class="btn btn-default">To'htatish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function stopSpeaker(){
+    window.speechSynthesis.cancel();
+  }
+  function speaker() {
+    const select = 'ko-KR'
+    const text = document.getElementById("text1").value;
+    speak(text, select);
+    function speak(text, language) {
+      window.speechSynthesis.cancel(); 
+      const speechMsg = new SpeechSynthesisUtterance();
+      speechMsg.lang = language; 
+      speechMsg.text = text; 
+      window.speechSynthesis.speak(speechMsg); 
+    };
+  }
+</script>

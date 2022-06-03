@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 router.get('/about',async (req, res) => {
     let menu = await GalleryMenu.find().lean()
     res.render('about', {
-        title: 'About',
+        title: 'Koreys tili haqida',
         layout: "site",
         isAbout: true, menu
     })
@@ -36,7 +36,14 @@ router.get('/text',async (req, res) => {
     res.render('text', {
         title: 'Matnlar',
         layout: "site",
-        isAbout: true, text
+        isText: true, text
+    })
+})
+router.get('/writing',async (req, res) => {
+    res.render('writing', {
+        title: "O'zingizni sinang",
+        layout: "site",
+        isWriting: true,
     })
 })
 router.get('/api/text/:id',async (req, res) => {

@@ -1,14 +1,16 @@
-<section class="grey section">
+<section class="grey section text-page">
   <div class="container">
-    {{#each text}}
-    <h2>{{title}}</h2>
-    <p>{{uzbek}}</p>
-    <p>{{content}}</p>
-    <button class="btn btn-default" onclick="speaker('{{_id}}')">Eshitish</button>
-    <button id="{{_id}}" style="display:none" onclick="stopSpeaker('{{_id}}')" class="stop btn btn-primary">
-      To'htatish
-    </button>
-    {{/each}}
+    <div class="container-md">
+      {{#each text}}
+      <h2>{{title}}</h2>
+      <p class="uzbek">{{uzbek}}</p>
+      <p class="koreys">{{content}}</p>
+      <button class="btn btn-default" onclick="speaker('{{_id}}')">Eshitish</button>
+      <button id="{{_id}}" style="display:none" onclick="stopSpeaker('{{_id}}')" class="stop btn btn-primary">
+        To'htatish
+      </button>
+      {{/each}}
+    </div>
   </div>
 </section>
 
