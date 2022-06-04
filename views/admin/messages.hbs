@@ -1,34 +1,29 @@
-<div class="container-xxl flex-grow-1 container-p-y">
-  <div class="card">
-    <div class="d-flex justify-content-between align-items-center mt-3">
-      <h5 class="card-header">{{title}}</h5>
-    </div>
-    <div class="card-body">
-      <div class="table-responsive text-nowrap">
-        <table class="table table-bordered">
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex mb-4 justify-content-between" style="align-items: center; ">
+          <h5 class="card-title" style="margin: 0;">{{title}}</h5>
+        </div>
+        <table class="table table-hover">
           <thead>
             <tr>
-              <th>Ism familiyasi</th>
-              <th>Email</th>
-              <th>Telefon raqami</th>
-              <th>Matn</th>
+              <th width="1%">№</th>
+              <th scope="col">Ismi</th>
+              <th scope="col">Emaili</th>
+              <th scope="col">Telefon raqami</th>
+              <th scope="col">Matn</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {{#each messages}}
             <tr>
-              <td>
-                <strong>{{fullname}}</strong>
-              </td>
-              <td>
-                {{email}}
-              </td>
-              <td>
-                {{phone}}
-              </td>
-              <td>
-                {{message}}
-              </td>
+              <td>{{increment @index}}</td>
+              <td>{{fullname}}</td>
+              <td>{{email}}</td>
+              <td>{{phone}}</td>
+              <td>{{message}}</td>
             </tr>
             {{/each}}
           </tbody>
@@ -37,4 +32,3 @@
     </div>
   </div>
 </div>
-<script></script>

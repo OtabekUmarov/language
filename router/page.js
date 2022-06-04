@@ -5,11 +5,13 @@ const router = Router()
 const auth = require('../middleware/auth')
 const Gallery = require('../modeles/gallery')
 const GalleryMenu = require('../modeles/language')
-const GallerySubMenu = require('../modeles/gallerysubmenu')
+// const GallerySubMenu = require('../modeles/gallerysubmenu')
 const Message = require('../modeles/message')
 const Classes = require('../modeles/classes')
 const Seat = require('../modeles/seat')
 const Text = require('../modeles/text')
+const Translate = require('../modeles/translate')
+const Letter = require('../modeles/letter')
 
 
 router.get('/', async (req, res) => {
@@ -46,6 +48,24 @@ router.get('/writing',async (req, res) => {
         isWriting: true,
     })
 })
+router.get('/translate',async (req, res) => {
+    let list = await Translate.find().lean()
+    res.render('translate', {
+        title: "Lug'at",
+        layout: "site",
+        isTranslate: true,
+        list
+    })
+})
+router.get('/letters',async (req, res) => {
+    let list = await Letter.find().lean()
+    res.render('letters', {
+        title: "Lug'at",
+        layout: "site",
+        isLetters: true,
+        list
+    })
+})
 router.get('/api/text/:id',async (req, res) => {
     let _id = req.params.id
     let text = await Text.findOne({_id}).lean()
@@ -70,22 +90,14 @@ router.get('/team', async (req, res) => {
         isTeam: true,menu
     })
 })
-router.get('/gallery/:id',async (req, res) => {
-    let gallery = await Gallery.find({menu:req.params.id}).lean()
-    let menu = await GalleryMenu.find().lean()
-    let submenu = await GallerySubMenu.find({menuId:req.params.id}).lean()
-    res.render('gallery', {
-        title: 'Gallery',
-        layout: "site",
-        isGallery: true,
-        gallery, menu,submenu
-    })
-})
+
 router.get('/contact', async(req, res) => {
     let menu = await GalleryMenu.find().lean()
     res.render('contact', {
         title: 'Contact',
         layout: "site",
+        success: req.flash('success'),
+        error: req.flash('error'),
         isContact: true,menu
     })
 })
@@ -98,11 +110,11 @@ router.get('/admin', auth,(req, res) => {
 })
 
 
-router.post('/messages', async (req, res) => {
-    
+router.post('/message', async (req, res) => {
     const { fullname,email,phone,message } = req.body
     const messages = await new Message({fullname,email,phone,message})
     await messages.save()
+    req.flash('success', 'Xabaringiz adminlar uchun yuborildi!')
     res.redirect('/contact')
   })
 router.post('/class/seat', async (req, res) => {

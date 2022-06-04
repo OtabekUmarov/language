@@ -1,0 +1,46 @@
+<section class="grey section text-page">
+  <div class="container">
+    <div class="container-md">
+       <table class="table table-hover">
+          <thead>
+            <tr>
+              <th width="1%">№</th>
+              <th scope="col">O'zbekcha nomi</th>
+              <th scope="col">Koreyscha nomi</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each list}}
+            <tr>
+              <td>{{increment @index}}</td>
+              <td>{{uzbek}}</td>
+              <td>{{koreys}}</td>
+              <td>
+                <button class="btn btn-default" onclick="speaker('{{koreys}}')">So'zni eshitish</button>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+    </div>
+  </div>
+</section>
+
+<script>
+  function stopSpeaker(){
+    window.speechSynthesis.cancel();
+  }
+  function speaker(value) {
+    const select = 'ko-KR'
+    const text = value;
+    speak(text, select);
+    function speak(text, language) {
+      window.speechSynthesis.cancel(); 
+      const speechMsg = new SpeechSynthesisUtterance();
+      speechMsg.lang = language; 
+      speechMsg.text = text; 
+      window.speechSynthesis.speak(speechMsg); 
+    };
+  }
+</script>
