@@ -57,8 +57,8 @@ app.use(fileMiddleware.single('img'))
 app.use(csrf())
 app.use(flash()) // !
 app.use(varMid)
-app.use(helmet())
-app.use(compression())
+// app.use(helmet())
+// app.use(compression())
 
 app.use(routers)
 
