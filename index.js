@@ -6,6 +6,7 @@ const csrf = require('csurf')
 const MongoStore = require('connect-mongodb-session')(session)
 const flash = require('connect-flash') // !
 const helmet = require('helmet')
+const path = require('path');
 const compression = require('compression')
 // Routerlar
 const routers = require('./routers')
@@ -30,9 +31,10 @@ app.set('views', 'views')
 app.use(express.urlencoded({
     extended: true
 }))
-app.use(express.static('assets'))
 
 // app.use(express.static(__dirname + '/public'))
+
+app.use(express.static(path.join(__dirname,'/assets/')))
 app.use('/media', express.static('media')) // !
 const MONGODB_URI = 'mongodb://127.0.0.1:27017/language'
 
