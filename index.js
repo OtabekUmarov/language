@@ -5,9 +5,7 @@ const session = require('express-session')
 const csrf = require('csurf')
 const MongoStore = require('connect-mongodb-session')(session)
 const flash = require('connect-flash') // !
-const helmet = require('helmet')
 const path = require('path');
-const compression = require('compression')
 // Routerlar
 const routers = require('./routers')
 
@@ -57,8 +55,6 @@ app.use(fileMiddleware.single('img'))
 app.use(csrf())
 app.use(flash()) // !
 app.use(varMid)
-// app.use(helmet())
-// app.use(compression())
 
 app.use(routers)
 
