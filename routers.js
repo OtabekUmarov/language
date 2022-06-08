@@ -9,7 +9,6 @@ router.use('/admin/language', auth, require('./router/language'))
 router.use('/admin/text', auth, require('./router/text'))
 router.use('/admin/letter', auth, require('./router/letter'))
 router.use('/admin/messages', auth, require('./router/messages'))
-router.use('/admin/class', auth, require('./router/class'))
 router.use('/admin/translate', auth, require('./router/translate'))
 
 module.exports = router

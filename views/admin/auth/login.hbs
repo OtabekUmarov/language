@@ -4,12 +4,17 @@
       <div class="col-md-12 col-lg-4">
         <div class="card login-box-container">
           <div class="card-body">
+              {{#if error}}
+                <p style="color: red; margin-top:20px; text-align:center">
+                    {{error}}
+                </p>
+              {{/if}}
             <div class="authent-logo">
               <img src="../../assets/images/logo@2x.png" alt="" />
             </div>
             <div class="authent-text">
-              <p>Welcome</p>
-              <p>Please Sign-in to your account.</p>
+              <p>Hush kelibsz</p>
+              <p>Tizimga kirish uchun ma'lumotlani kiriting</p>
             </div>
             <form method="POST" action="/admin/auth/login">
               <input type="hidden" name="_csrf" value="{{csrf}}" />
@@ -20,9 +25,9 @@
                     name="name"
                     class="form-control"
                     id="floatingInput"
-                    placeholder="Username"
+                    placeholder="Login"
                   />
-                  <label for="floatingInput">Username</label>
+                  <label for="floatingInput">Login</label>
                 </div>
               </div>
               <div class="mb-3">
@@ -32,13 +37,13 @@
                     name="password"
                     class="form-control"
                     id="floatingPassword"
-                    placeholder="Password"
+                    placeholder="Parol"
                   />
-                  <label for="floatingPassword">Password</label>
+                  <label for="floatingPassword">Parol</label>
                 </div>
               </div>
               <div class="d-grid">
-                <button type="submit" class="btn btn-info m-b-xs">Sign In</button>
+                <button type="submit" class="btn btn-info m-b-xs">Kirish</button>
               </div>
             </form>
           </div>

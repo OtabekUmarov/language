@@ -33,3 +33,42 @@
 .my-col-6 button {
   width: 100%;
 }
+@media (max-width: 767px) {
+  .navbar-header {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items:center;
+  }
+  .ttmenu .navbar-brand {
+    height: auto;
+  }
+  .ttmenu .navbar-default .navbar-toggle {
+    margin: 0;
+  }
+  .ttmenu .navbar-default {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .feature-list {
+    width: 100%;
+  }
+  .copyright p {
+    text-align: center;
+  }
+  .list-inline {
+    margin-top: 25px;
+    text-align: center;
+  }
+  .ttmenu .navbar-collapse,
+  .navbar-collapse.in {
+    position: fixed !important;
+    top: 66px;
+    left: 0;
+    width: 100%;
+    background-color:#fff;
+  }
+  .ttmenu .navbar-default .navbar-toggle {
+    padding: 5px;
+    height: 38px;
+  }
+}

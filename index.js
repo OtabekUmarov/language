@@ -30,7 +30,6 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-// app.use(express.static(__dirname + '/public'))
 
 app.use(express.static(path.join(__dirname,'/assets/')))
 app.use('/media', express.static('media')) // !
@@ -68,9 +67,6 @@ async function dev() {
         await mongoose.connect(MONGODB_URI, {
             useNewUrlParser: true
         })
-        // app.listen(process.env.PORT,()=>{
-        //     console.log('Server is running')
-        // })
         app.listen(PORT, () => {
             console.log(`Server is running ${PORT}`)
         })

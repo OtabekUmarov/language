@@ -3,34 +3,25 @@ const {
 } = require('express')
 const router = Router()
 const auth = require('../middleware/auth')
-const Gallery = require('../modeles/gallery')
-const GalleryMenu = require('../modeles/language')
-// const GallerySubMenu = require('../modeles/gallerysubmenu')
 const Message = require('../modeles/message')
-const Classes = require('../modeles/classes')
-const Seat = require('../modeles/seat')
 const Text = require('../modeles/text')
 const Translate = require('../modeles/translate')
 const Letter = require('../modeles/letter')
 
 
 router.get('/', async (req, res) => {
-    let menu = await GalleryMenu.find().lean()
     res.render('index', {
-        title: 'Home',
+        title: 'Bosh sahifa',
         layout: "site",
-        success: req.flash('success'),
-        error: req.flash('error'),
-        isHome: true, menu
+        isHome: true
     })
 })
 
 router.get('/about',async (req, res) => {
-    let menu = await GalleryMenu.find().lean()
     res.render('about', {
         title: 'Koreys tili haqida',
         layout: "site",
-        isAbout: true, menu
+        isAbout: true
     })
 })
 router.get('/text',async (req, res) => {
@@ -60,7 +51,7 @@ router.get('/translate',async (req, res) => {
 router.get('/letters',async (req, res) => {
     let list = await Letter.find().lean()
     res.render('letters', {
-        title: "Lug'at",
+        title: "Koreys alifbosi",
         layout: "site",
         isLetters: true,
         list
@@ -72,40 +63,24 @@ router.get('/api/text/:id',async (req, res) => {
     res.send(text)
 })
 
-router.get('/class', async(req, res) => {
-    let menu = await GalleryMenu.find().lean()
-    let classes = await Classes.find().lean()
-    res.render('class', {
-        title: 'Classes',
-        layout: "site",
-        isClass: true,menu,classes
-    })
-})
 
-router.get('/team', async (req, res) => {
-    let menu = await GalleryMenu.find().lean()
-    res.render('team', {
-        title: 'Teachers',
-        layout: "site",
-        isTeam: true,menu
-    })
-})
 
 router.get('/contact', async(req, res) => {
-    let menu = await GalleryMenu.find().lean()
     res.render('contact', {
-        title: 'Contact',
+        title: 'Aloqa',
         layout: "site",
         success: req.flash('success'),
         error: req.flash('error'),
-        isContact: true,menu
+        isContact: true
     })
 })
+
+
 router.get('/admin', auth,(req, res) => {
-    res.render('admin', {
+    res.render('admin/language', {
         title: 'Dashboard',
         layout: "admin",
-        isAdmin: true
+        isLanguage: true
     })
 })
 
@@ -116,12 +91,6 @@ router.post('/message', async (req, res) => {
     await messages.save()
     req.flash('success', 'Xabaringiz adminlar uchun yuborildi!')
     res.redirect('/contact')
-  })
-router.post('/class/seat', async (req, res) => {
-    const { fullname,phone,classId } = req.body
-    const seat = await new Seat({fullname,phone,classId})
-    await seat.save()
-    res.redirect('/class')
   })
 
 module.exports = router
