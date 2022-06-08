@@ -57,9 +57,7 @@ app.use(varMid)
 
 app.use(routers)
 
-// app.all('*', (req, res) => {
-//     res.redirect("/");
-// });
+
 const PORT = 3001
 
 async function dev() {
