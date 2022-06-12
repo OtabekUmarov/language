@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex mb-4 justify-content-between" style="align-items: center; ">
+          <h5 class="card-title" style="margin: 0;">{{title}}</h5>
+          <button class="btn btn-primary" onclick="openModal()">
+            Test qo'shish
+          </button>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th width="1%">№</th>
+              <th scope="col">Savol nomi</th>
+              <th scope="col">To'g'ri javob</th>
+              <th scope="col">Noto'g'ri javob</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each tests}}
+            <tr>
+              <td>{{increment @index}}</td>
+              <td>{{question}}</td>
+              <td>
+                {{#each answers}}
+                  {{#if iscorrect}}
+                  <span style="color: green">{{title}}</span>
+                  {{/if}}
+                {{/each}}
+              </td>
+              <td>
+                {{#each answers}}
+                  {{#if iscorrect}}
+                  <span></span>
+                  {{else}}
+                  <span>{{title}}</span>
+                  {{/if}}
+                {{/each}}
+              </td>
+              <td>
+                <a href="/admin/test/delete/{{_id}}" class="badge bg-danger">O'chirish</a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true"
+  role="dialog">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <form action="/admin/test" method="post" action="">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">
+            Test qo'shish
+          </h5>
+          <button type="button" class="btn-close" onclick="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="_csrf" value="{{csrf}}" />
+          <div class="mb-3">
+            <label for="textInput" class="form-label">Savol matni</label>
+            <textarea name="question" class="form-control" id="textInput" rows="5"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="titleInput" class="form-label">To'g'ri javob</label>
+            <input type="text" name="correct" class="form-control" id="titleInput">
+          </div>
+          <div class="mb-3">
+            <label for="titleInput" class="form-label">Noto'g'ri javob</label>
+            <input type="text" name="answer" class="form-control" id="titleInput">
+          </div>
+          <div class="mb-3">
+            <label for="titleInput" class="form-label">Noto'g'ri javob</label>
+            <input type="text" name="answer1" class="form-control" id="titleInput">
+          </div>
+          <div class="mb-3">
+            <label for="titleInput" class="form-label">Noto'g'ri javob</label>
+            <input type="text" name="answer2" class="form-control" id="titleInput">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary">Saqlash</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="modal-backdrop"></div>
+
+<script>
+  function openModal() {
+    document.body.classList.add("modal-open");
+    document.getElementById('modal-backdrop').classList.add("modal-backdrop", "show");
+    document.getElementById('modal').classList.add("show");
+    document.getElementById('modal').style.display = "block";
+  }
+
+  function closeModal() {
+    document.body.classList.remove("modal-open");
+    document.getElementById('modal-backdrop').classList.remove("modal-backdrop", "show", "fade");
+    document.getElementById('modal').classList.remove("show");
+    document.getElementById('modal').style.display = "none";
+  }
+
+</script>

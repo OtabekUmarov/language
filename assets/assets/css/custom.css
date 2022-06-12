@@ -72,3 +72,7 @@
     height: 38px;
   }
 }
+
+.modal-dialog-scrollable .modal-content {
+  overflow-y: auto;
+}
