@@ -51,12 +51,22 @@ app.use(session({
 }))
 
 app.use(fileMiddleware.single('img'))
-app.use(csrf())
+// app.use(csrf())
 app.use(flash()) // !
 app.use(varMid)
 
 app.use(routers)
 
+app.use(function (req, res, next) {
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, X-CSRF-Token');
+    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 
 const PORT = 3001
 

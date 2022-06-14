@@ -76,6 +76,8 @@ router.get('/contact', async(req, res) => {
 })
 
 
+
+
 router.get('/admin', auth,(req, res) => {
     res.render('admin/language', {
         title: 'Dashboard',
@@ -93,4 +95,24 @@ router.post('/message', async (req, res) => {
     res.redirect('/contact')
   })
 
+
+
+
+
+  router.get('/test', async(req, res) => {
+    res.render('test', {
+        title: 'Test',
+        layout: "site",
+        success: req.flash('success'),
+        error: req.flash('error'),
+        isTest: true
+    })
+})
+
+
+router.post('/product', async (req, res) => {
+    console.log(req.body)
+    res.send(JSON.stringify('ok'))
+    // res.redirect('/test')
+  })
 module.exports = router
