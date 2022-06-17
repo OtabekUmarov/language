@@ -5,6 +5,7 @@ const router = Router()
 const auth = require('../middleware/auth')
 const Message = require('../modeles/message')
 const Text = require('../modeles/text')
+const Test = require('../modeles/test')
 const Translate = require('../modeles/translate')
 const Letter = require('../modeles/letter')
 
@@ -100,19 +101,42 @@ router.post('/message', async (req, res) => {
 
 
   router.get('/test', async(req, res) => {
+    let test = await Test.find().limit(10).lean()
     res.render('test', {
         title: 'Test',
         layout: "site",
         success: req.flash('success'),
         error: req.flash('error'),
-        isTest: true
+        isTest: true, test
     })
 })
 
 
 router.post('/product', async (req, res) => {
-    console.log(req.body)
-    res.send(JSON.stringify('ok'))
+    // console.log(req.body)
+    let answers = req.body
+    let correct = 0
+    Object.keys(answers).forEach( async key => {
+        console.log(key)
+        let test = await Test.findOne({_id: key}).lean()
+        test.answers.forEach( answer => {
+            console.log(answer)
+            if(answer.title === answers[key]){
+                if(answer.iscorrect){
+                    correct++
+                }
+                console.log('true')
+            } else {
+                // console.log('false')
+            }
+        })
+        // console.log(test)
+        // console.log(answers[key])
+    })
+    setTimeout(() => {
+        res.send(JSON.stringify(correct))
+
+    }, 200);
     // res.redirect('/test')
   })
 module.exports = router

@@ -76,3 +76,126 @@
 .modal-dialog-scrollable .modal-content {
   overflow-y: auto;
 }
+.quiz {
+  margin-top:60px;
+}
+.test {
+  padding: 20px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: box-shadow 0.5s ease-in-out;
+}
+.test:hover {
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+/* label */
+label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  margin: 12px 0;
+
+  cursor: pointer;
+  position: relative;
+}
+
+
+/* input */
+input[type=radio] {
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+
+/* .design */
+.design {
+  width: 16px;
+  height: 16px;
+
+  border: 1px solid hsl(0, 0%, 14%);
+  border-radius: 100%;
+  margin-right: 16px;
+
+  position: relative;
+}
+
+.design::before,
+.design::after {
+  content: "";
+  display: block;
+
+  width: inherit;
+  height: inherit;
+
+  border-radius: inherit;
+
+  position: absolute;
+  transform: scale(0);
+  transform-origin: center center;
+}
+
+.design:before {
+  background: hsl(0, 0%, 14%);
+  opacity: 0;
+  transition: .3s;
+}
+
+.design::after {
+  background: hsl(250, 100%, 44%);
+  opacity: .4;
+  transition: .6s;
+}
+
+
+/* .text */
+.text {
+  color: hsl(0, 0%, 14%);
+  font-weight: bold;
+}
+
+
+/* checked state */
+input:checked+.design::before {
+  opacity: 1;
+  transform: scale(.6);
+}
+
+
+/* other states */
+input:hover+.design,
+input:focus+.design {
+  border: 1px solid hsl(250, 100%, 44%);
+}
+
+input:hover+.design:before,
+input:focus+.design:before {
+  background: hsl(250, 100%, 44%);
+}
+
+input:hover~.text {
+  color: hsl(250, 100%, 44%);
+}
+
+input:focus+.design::after,
+input:active+.design::after {
+  opacity: .1;
+  transform: scale(2.6);
+}
+
+.abs-site-link {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  color: hsla(0, 0%, 0%, .6);
+  background: hsla(0, 0%, 98%, .6);
+  font-size: 16px;
+}

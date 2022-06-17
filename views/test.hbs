@@ -1,116 +1,42 @@
-{{!-- <form action="/product?_csrf={{csrf}}" method="post" class="needs-validation" novalidate enctype="multipart/form-data"
-  name="newproduct">
-  <input type="hidden" name="atributes">
+<div class="container-md quiz">
   <div class="row">
-    <div class="col-6">
-      <div class="mb-3">
-        <label for="title" class="form-label">Название</label>
-        <input type="text" name="title" class="form-control" id="title" required placeholder="Название">
-        <div class="invalid-feedback">
-          Заполните поля
-        </div>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="mb-3">
-        <label for="validationCustom04" class="form-label">Категория</label>
-        <select name="category" class="form-select" id="validationCustom04" required=""
-          onchange="getatribute(event.target.value)">
-          <option selected="" disabled="" value="">Выберите из списка</option>
-          {{#each category}}
-          <option value="{{_id}}">{{title}}</option>
+    <div class="col-lg-9 col-sm-12">
+      <form action="/product?_csrf={{csrf}}" method="post" enctype="multipart/form-data"
+        name="test">
+          {{#each test}}
+          <div class="test" id="{{_id}}">
+            <div class="test-title">
+              <h3>№{{increment @index}}. {{question}}</h3>
+            </div>
+              <div class="mb-3">
+                {{#each answers}}
+                <label>
+                  <input type="radio" name="{{../_id}}" value="{{title}}">
+                  <span class="design"></span>
+                  <span class="text">{{title}}</span>
+                </label>
+                {{/each}}
+              </div>
+          </div>
           {{/each}}
-        </select>
-        <div class="invalid-feedback">
-          Выберите из списка
-        </div>
-      </div>
+        <button type="submit" class="btn btn-primary">Yuborish</button>
+        </form>
     </div>
-    <div class="col-6">
-      <div class="form-floating mb-3">
-        <input type="number" name="price" class="form-control" id="order" placeholder="Название">
-        <label for="order">Стоимость</label>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="form-floating mb-3">
-        <input type="number" name="sale" class="form-control" id="order" placeholder="Название" value="0">
-        <label for="order">Скидка %</label>
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-        <label for="text">Описание товара</label>
-        <textarea name="text" class="form-control" id="text" placeholder="Описание товара" value="0"></textarea>
-      </div>
-    </div>
+    <div class="col-lg-3 col-sm-12"></div>
   </div>
-  <div class="row" id="atrlist">
-
-  </div>
-  <div class="row">
-    <div class="col-4">
-      <div class=" mb-3">
-        <input type="number" name="order" class="form-control" id="order" placeholder="Номер порядки">
-
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="mb-3">
-        <select name="status" class="form-select" id="validationCustom04" required="">
-          <option selected="" disabled="" value="">Выберите статус товара из списка</option>
-          <option value="0">Нет в наличие</option>
-          <option value="1">Есть в наличие</option>
-          <option value="2">Предзаказ</option>
-          <option value="3">Отключено</option>
-        </select>
-        <div class="invalid-feedback">
-          Выберите статус товара из списка
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="mb-3 d-flex align-items-center justify-content-around">
-        <div class="form-check form-switch mr-3">
-          <input class="form-check-input" name="top" value="1" type="checkbox" id="top">
-          <label class="form-check-label" for="top">Топ товар</label>
-        </div>
-        <div class="form-check form-switch">
-          <input class="form-check-input" name="news" value="1" type="checkbox" id="news">
-          <label class="form-check-label" for="news">Новый товар</label>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-3">
-      <div class="mb-3">
-        <label for="img1" class="form-label">Фотографи</label>
-        <input class="form-control" type="file" multiple id="img1" name="img1">
-      </div>
-    </div>
-  </div>
-
-  <button type="submit" class="btn btn-primary">Добавить</button>
-</form> --}}
+</div>
 <script>
-  let newProduct = document.forms.newproduct
-  newProduct.addEventListener('submit', (e) => {
+  let tests = document.forms.test
+  tests.addEventListener('submit', async (e) => {
     e.preventDefault()
-    let form = {
-      title: 'test',
-      id: 1,
-      category: 1,
-    }
-    let formData = new FormData(form)
-    fetch('/product', {
+    let formData = new FormData(tests)
+    await fetch('/product', {
         method: 'post',
         body: formData,
       }).then(res => res.json())
       .then(data => {
-        console.log(data) {
-          { !--location.reload() -- }
-        }
+        console.log(data) 
       })
   })
 </script>
+          {{!-- { !--location.reload() -- } --}}
