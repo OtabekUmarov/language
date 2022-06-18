@@ -101,7 +101,20 @@ router.post('/message', async (req, res) => {
 
 
   router.get('/test', async(req, res) => {
-    let test = await Test.find().limit(10).lean()
+    let test = await Test.find().sort({_id:-1}).lean()
+    test.forEach(element => {
+        element.answers = shuffle(element.answers)
+     })
+    function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+        while (currentIndex != 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
     res.render('test', {
         title: 'Test',
         layout: "site",
@@ -113,30 +126,20 @@ router.post('/message', async (req, res) => {
 
 
 router.post('/product', async (req, res) => {
-    // console.log(req.body)
     let answers = req.body
     let correct = 0
     Object.keys(answers).forEach( async key => {
-        console.log(key)
         let test = await Test.findOne({_id: key}).lean()
         test.answers.forEach( answer => {
-            console.log(answer)
             if(answer.title === answers[key]){
                 if(answer.iscorrect){
                     correct++
                 }
-                console.log('true')
-            } else {
-                // console.log('false')
-            }
+            } 
         })
-        // console.log(test)
-        // console.log(answers[key])
     })
     setTimeout(() => {
         res.send(JSON.stringify(correct))
-
     }, 200);
-    // res.redirect('/test')
-  })
+})
 module.exports = router
