@@ -94,17 +94,13 @@ router.post('/message', async (req, res) => {
     await messages.save()
     req.flash('success', 'Xabaringiz adminlar uchun yuborildi!')
     res.redirect('/contact')
-  })
+})
 
-
-
-
-
-  router.get('/test', async(req, res) => {
+router.get('/test', async(req, res) => {
     let test = await Test.find().sort({_id:-1}).lean()
     test.forEach(element => {
         element.answers = shuffle(element.answers)
-     })
+    })
     function shuffle(array) {
         let currentIndex = array.length,  randomIndex;
         while (currentIndex != 0) {
@@ -123,7 +119,6 @@ router.post('/message', async (req, res) => {
         isTest: true, test
     })
 })
-
 
 router.post('/product', async (req, res) => {
     let answers = req.body
