@@ -5153,6 +5153,7 @@ textarea.form-control-lg {
 }
 .modal-dialog-scrollable .modal-body {
   overflow-y: auto;
+  height: 400px;
 }
 
 .modal-dialog-centered {
